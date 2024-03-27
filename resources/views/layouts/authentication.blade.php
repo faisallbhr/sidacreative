@@ -28,7 +28,7 @@
             }
         </script>
     </head>
-    <body class="font-inter antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
+    <body class="antialiased font-inter bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
 
         <main class="bg-white dark:bg-slate-900">
 
@@ -64,7 +64,7 @@
                             </div>
                         </div>
 
-                        <div class="max-w-sm mx-auto w-full px-4 py-8">
+                        <div class="w-full max-w-sm px-4 py-8 mx-auto">
                             {{ $slot }}
                         </div>
 
@@ -73,9 +73,9 @@
                 </div>
 
                 <!-- Image -->
-                <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
+                <div class="absolute top-0 bottom-0 right-0 hidden md:block md:w-1/2" aria-hidden="true">
                     <img class="object-cover object-center w-full h-full" src="{{ asset('images/auth-image.jpg') }}" width="760" height="1024" alt="Authentication image" />
-                    <img class="absolute top-1/4 left-0 -translate-x-1/2 ml-8 hidden lg:block" src="{{ asset('images/auth-decoration.png') }}" width="218" height="224" alt="Authentication decoration" />
+                    <img class="absolute left-0 hidden ml-8 -translate-x-1/2 top-1/4 lg:block" src="{{ asset('images/auth-decoration.png') }}" width="218" height="224" alt="Authentication decoration" />
                 </div>
 
             </div>

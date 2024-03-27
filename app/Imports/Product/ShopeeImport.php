@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Imports\Product;
+
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+
+class ShopeeImport implements ToCollection
+{
+    /**
+     * @param Collection $collection
+     */
+    public function collection(Collection $collection)
+    {
+        foreach ($collection as $index => $row) {
+            if ($index > 0) {
+                $sku = $row[6];
+                $item_out = $row[22];
+
+                if ($sku == '-') {
+                    continue;
+                }
+
+                $extProduct = \DB::table('products')
+                    ->where('sku', $sku)
+                    ->where('platform', 'shopee')
+                    ->latest()
+                    ->first();
+
+                if ($extProduct) {
+                    $currMonth = Carbon::now()->month;
+                    $stockMonth = Carbon::parse($extProduct->created_at)->month;
+
+                    if ($stockMonth == $currMonth) {
+                        \DB::table('products')
+                            ->where('id', $extProduct->id)
+                            ->update([
+                                'item_out' => $extProduct->item_out + $item_out
+                            ]);
+                    } else {
+                        \DB::table('products')->insert([
+                            'sku' => $sku,
+                            'platform' => 'shopee',
+                            'item_out' => $item_out,
+                            'created_at' => now(),
+                            'updated_at' => now()
+                        ]);
+                    }
+                } else {
+                    \DB::table('products')->insert([
+                        'sku' => $sku,
+                        'platform' => 'shopee',
+                        'item_out' => $item_out,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+        }
+    }
+}

@@ -42,10 +42,21 @@
         </svg>
     </div>
 
+    @php
+        $currentTime = now();
+        $greeting = 'Good morning';
+        $hour = $currentTime->hour;
+
+        if ($hour >= 12 && $hour < 17) {
+            $greeting = 'Good afternoon';
+        } elseif ($hour >= 17) {
+            $greeting = 'Good evening';
+        }
+    @endphp
     <!-- Content -->
     <div class="relative">
-        <h1 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Good afternoon, {{ Auth::user()->name }} 👋</h1>
-        <p class="dark:text-indigo-200">Here is what's happening with your projects today:</p>
+        <h1 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">{{ $greeting }}, {{ Auth::user()->name }} 👋</h1>
+        <p class="dark:text-indigo-200">Here is what's happening with your stikers sales this year:</p>
     </div>
 
 </div>

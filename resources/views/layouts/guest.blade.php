@@ -28,7 +28,7 @@
             }
         </script>         
     </head>
-    <body class="font-inter antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
+    <body class="antialiased font-inter bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">
 
         <main class="bg-white dark:bg-slate-900">
 
@@ -62,7 +62,7 @@
                         </div>
                     </div>
 
-                    <div class="w-full max-w-3xl mx-auto px-4 py-8">
+                    <div class="w-full max-w-3xl px-4 py-8 mx-auto">
                         {{ $slot }}
                     </div>
 

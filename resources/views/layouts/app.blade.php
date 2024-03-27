@@ -12,6 +12,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
 
+        {{-- Font Awesome --}}
+        <script src="https://kit.fontawesome.com/516b6a89c8.js" crossorigin="anonymous"></script>
+
+        {{-- jQuery --}}
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -29,7 +35,7 @@
         </script>
     </head>
     <body
-        class="font-inter antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400"
+        class="antialiased font-inter bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400"
         :class="{ 'sidebar-expanded': sidebarExpanded }"
         x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
         x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))"    
@@ -53,6 +59,9 @@
 
                 <x-app.header />
 
+                @include('components.report.modal-upload')
+                @include('components.report.modal-edit')
+                
                 <main class="grow">
                     {{ $slot }}
                 </main>
@@ -61,6 +70,17 @@
 
         </div>
 
+        <script>
+            window.onclick = function(event) {
+                const modal = document.getElementById('modal');
+                const editModal = document.getElementById('editModal');
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                } else if(event.target == editModal) {
+                    editModal.style.display = 'none';
+                }
+            }
+        </script>
         @livewireScripts
     </body>
 </html>

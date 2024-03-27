@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\DataFeed;
 
@@ -9,28 +10,21 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $dataFeed = new DataFeed();
+        $data = new Product();
 
-        return view('pages/dashboard/dashboard', compact('dataFeed'));
+        // $data['label'] = array_column($products->getDataDashboard('shopee'), 'month');
+        // $data['quantity'] = array_column($products->getDataDashboard('shopee'), 'month');
+
+        return view('pages/dashboard/dashboard', compact('data'));
     }
-
-    /**
-     * Displays the analytics screen
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function analytics()
+    public function chart(Request $request)
     {
-        return view('pages/dashboard/analytics');
-    }
-
-    /**
-     * Displays the fintech screen
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function fintech()
-    {
-        return view('pages/dashboard/fintech');
+        $data = new Product();
+        $months = array_column($data->getDataDashboard($request->platform), 'month');
+        $quantity = array_column($data->getDataDashboard($request->platform), 'quantity');
+        return (object) [
+            'labels' => $months,
+            'data' => $quantity
+        ];
     }
 }

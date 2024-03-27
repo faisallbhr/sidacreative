@@ -24,13 +24,7 @@
                 <x-input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
         </div>
-        <div class="flex items-center justify-between mt-6">
-            <div class="mr-1">
-                <label class="flex items-center" name="newsletter" id="newsletter">
-                    <input type="checkbox" class="form-checkbox" />
-                    <span class="text-sm ml-2">Email me about product news.</span>
-                </label>
-            </div>
+        <div class="flex items-center justify-center mt-6">
             <x-button>
                 {{ __('Sign Up') }}
             </x-button>                

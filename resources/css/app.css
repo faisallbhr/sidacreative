@@ -6,3 +6,15 @@
 @import 'additional-styles/flatpickr.css';
 
 @import 'tailwindcss/utilities';
+
+.report-pagination>div {
+    width: 100%;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+}
+
+
+.report-pagination>div>div {
+    @apply w-full md:w-auto text-center
+}
